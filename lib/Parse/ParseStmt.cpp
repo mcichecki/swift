@@ -1966,6 +1966,11 @@ ParserResult<Stmt> Parser::parseStmtDo(LabeledStmtInfo labelInfo) {
     return makeParserResult(status,
                          new (Context) DoStmt(labelInfo, doLoc, body.get()));
   }
+    
+    if (Tok.is(tok::kw_true) || Tok.is(tok::kw_false)) {
+        // we know that there are braces following Bool
+        // return ?1
+    }
 
   // But if we do, advise the programmer that it's 'repeat' now.
   diagnose(doLoc, diag::do_while_now_repeat_while)
